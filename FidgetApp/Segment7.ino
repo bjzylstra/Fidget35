@@ -25,11 +25,10 @@ void digitTo7Segment(int digit, bool decimal)
   int digitMaps[] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71};
   int digitMap = 0x0;
 
-  if (digit <= 15)
+  if (digit <= 0xF)
   {
     digitMap = digitMaps[digit];
   }
-  int i;
 
   if (decimal)
   {
@@ -40,7 +39,63 @@ void digitTo7Segment(int digit, bool decimal)
     digitalWrite(segDPPin, HIGH);
   }
   
-  for (i = 0; i < 7; i++)
+  digitMapTo7Segment(digitMap);
+}
+
+void letterTo7Segment(char letter)
+{
+  int digitMaps[] = 
+  {
+    0x77,
+    0x7C,
+    0x39,
+    0x5E,
+    0x79,
+    'F',
+    'G',
+    0x74,
+    0x04,
+    0x1E,
+    'K',
+    'L',
+    'M',
+    'N',
+    0x5C,
+    'P',
+    'Q',
+    0x50,
+    0x6D,
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z'
+  };
+  
+  // Always turn of the decimal in letter mode
+  digitalWrite(segDPPin, HIGH);
+
+  int digitMap = 0x0;
+
+  // Map lower case letters to upper case
+  if (letter >= 'a' && letter <= 'z')
+  {
+    letter -= 0x20;
+  }
+
+  if (letter >= 'A' && letter <= 'Z')
+  {
+    digitMap = digitMaps[letter - 'A'];
+  }
+
+  digitMapTo7Segment(digitMap);
+}
+
+void digitMapTo7Segment(int digitMap)
+{
+  for (int i = 0; i < 7; i++)
   {
     if (digitMap & 1)
     {

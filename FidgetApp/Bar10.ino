@@ -24,8 +24,21 @@ void bar10Setup()
 
 void digitToBar10(int digit)
 {
-  int i;
-  for (i = 0; i < 10; i++)
+  Serial.print("Digit ");
+  Serial.println(digit);
+
+  // Use bar 10 as the 10s place.
+  if (digit > 9)
+  {
+    digitalWrite(bar10Pin, HIGH);
+    digit = digit - 10;
+  }
+  else
+  {
+    digitalWrite(bar10Pin, LOW);
+  }
+  
+  for (int i = 0; i < 9; i++)
   {
     if (i < digit)
     {
@@ -43,7 +56,7 @@ void maskToBar10(int mask)
   int i;
   for (i = 0; i < 10; i++)
   {
-    if (mask & 0x1 == 0x1)
+    if ((mask & 0x1) == 0x1)
     {
       digitalWrite(barPins[i], HIGH);
     }
