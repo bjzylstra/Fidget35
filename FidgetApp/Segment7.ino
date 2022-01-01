@@ -46,32 +46,32 @@ void letterTo7Segment(char letter)
 {
   int digitMaps[] = 
   {
-    0x77,
-    0x7C,
-    0x39,
-    0x5E,
-    0x79,
-    'F',
-    'G',
-    0x74,
-    0x04,
-    0x1E,
-    'K',
-    'L',
-    'M',
-    'N',
-    0x5C,
-    'P',
-    'Q',
-    0x50,
-    0x6D,
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z'
+    0x77, // A
+    0x7C, // B
+    0x39, // C
+    0x5E, // D
+    0x79, // E
+    0x71, // F
+    0x3D, // G
+    0x76, // H
+    0x30, // I
+    0x1E, // J
+    0x46, // K
+    0x38, // L
+    0x4F, // M
+    0x54, // N
+    0x5C, // O
+    0x73, // P
+    0x67, // Q
+    0x50, // R
+    0x6D, // S
+    0x39, // T
+    0x3E, // U
+    0x1C, // V
+    0x4E, // W
+    0x36, // X
+    0x66, // Y
+    0x5B  // Z
   };
   
   // Always turn of the decimal in letter mode

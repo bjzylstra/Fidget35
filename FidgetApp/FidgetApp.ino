@@ -19,17 +19,16 @@ int delayTime = 200;
 bool decimalOn = true;
 int lastDigit = 0;
 int counterDelay = 0;
-char messages[16][10] = {
-  "Joash",
-  "Adira",
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
+char messages[15][10] = {
+  "Hel lo",
+  "Isaiah",
+  "Gideon",
+  "Papa",
+  "Grandma",
+  "Dad",
+  "Mom",
+  "loves",
+  "bye",
   " ",
   " ",
   " ",
@@ -37,8 +36,8 @@ char messages[16][10] = {
   " ",
   " "
 };
-int messageIndex = 0;
-char* text = messages[messageIndex];
+int messageIndex = -1;
+char* text = "";
 int textIndex = 0;
 
 void setup() {
@@ -73,8 +72,9 @@ void loop() {
         sliderLedOutput(false);
       }
     
-      if (upDown == UpDownPosition::center)
+      if (upDown == UpDownPosition::center && messageIndex >= 0)
       {
+        // Show text mode
         decimalOn = false;
       }
       if (counterDelay == 0)
@@ -96,24 +96,28 @@ void loop() {
             }
             break;
           case UpDownPosition::center:
-            messageIndex = binaryInputRead();
-            if (text == messages[messageIndex])
+            if (text[textIndex] == 0)
             {
-              // On same message
-              if (text[textIndex] == 0)
+              // End of message. Find next message
+              textIndex = 0;
+              messageIndex = binaryInputRead() - 1;
+              if (messageIndex >= 0)
               {
-                textIndex = 0;
+                text = messages[messageIndex];
               }
               else
               {
-                textIndex++;
+                text = "";
               }
             }
             else
             {
-              // New message
-              text = messages[messageIndex];
-              textIndex = 0;
+              textIndex++;
+              if (text[textIndex] == ' ')
+              {
+                // A space between identical letters. Make it half as long.
+                counterDelay = (10 - sliderDigit)/2;
+              }
             }
             break;
           case UpDownPosition::unknown:
