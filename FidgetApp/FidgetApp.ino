@@ -116,7 +116,7 @@ void loop() {
               if (text[textIndex] == ' ')
               {
                 // A space between identical letters. Make it half as long.
-                counterDelay = (10 - sliderDigit)/2;
+                counterDelay = (10 - sliderDigit) - 1;
               }
             }
             break;

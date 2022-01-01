@@ -60,7 +60,7 @@ void letterTo7Segment(char letter)
     0x38, // L
     0x4F, // M
     0x54, // N
-    0x5C, // O
+    0x3F, // O
     0x73, // P
     0x67, // Q
     0x50, // R
